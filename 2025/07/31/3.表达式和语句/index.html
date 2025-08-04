@@ -1,0 +1,650 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>表达式和语句 | ShiinoHiyori's Website</title><meta name="author" content="IBUKI"><meta name="copyright" content="IBUKI"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="3.表达式和语句3.1 运算符​	我们先来理清&#x3D;&#x3D;表达式&#x3D;&#x3D;和&#x3D;&#x3D;运算符&#x3D;&#x3D;的关系。 ​	表达式是由一个或多个操作数通过运算符按照一定的规则组合成的。而运算符——即具有运算功能的符号。根据使用运算符的对象个数，将运算符分为&#x3D;&#x3D;单目运算符&#x3D;&#x3D;、&#x3D;&#x3D;双目运算符&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="表达式和语句">
+<meta property="og:url" content="http://example.com/2025/07/31/3.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:site_name" content="ShiinoHiyori&#39;s Website">
+<meta property="og:description" content="3.表达式和语句3.1 运算符​	我们先来理清&#x3D;&#x3D;表达式&#x3D;&#x3D;和&#x3D;&#x3D;运算符&#x3D;&#x3D;的关系。 ​	表达式是由一个或多个操作数通过运算符按照一定的规则组合成的。而运算符——即具有运算功能的符号。根据使用运算符的对象个数，将运算符分为&#x3D;&#x3D;单目运算符&#x3D;&#x3D;、&#x3D;&#x3D;双目运算符&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/ShiinoHiyori-icon.png">
+<meta property="article:published_time" content="2025-07-31T09:07:43.000Z">
+<meta property="article:modified_time" content="2025-07-31T09:07:43.000Z">
+<meta property="article:author" content="IBUKI">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/ShiinoHiyori-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "表达式和语句",
+  "url": "http://example.com/2025/07/31/3.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/",
+  "image": "http://example.com/img/ShiinoHiyori-icon.png",
+  "datePublished": "2025-07-31T09:07:43.000Z",
+  "dateModified": "2025-07-31T09:07:43.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "IBUKI",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/07/31/3.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '表达式和语句',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: linear-gradient(135deg, #D1F3FF 0%, #A3DFFF 50%, #1A3D7E 100%);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/ShiinoHiyori-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/videos/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于站长</span></a></div></div></div></div><div class="post type-tag" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">ShiinoHiyori's Website</span></a><a class="nav-page-title" href="/"><span class="site-name">表达式和语句</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/videos/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于站长</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">表达式和语句</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-07-31T09:07:43.000Z" title="发表于 2025-07-31 17:07:43">2025-07-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-31T09:07:43.000Z" title="更新于 2025-07-31 17:07:43">2025-07-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="3-表达式和语句"><a href="#3-表达式和语句" class="headerlink" title="3.表达式和语句"></a>3.表达式和语句</h1><h2 id="3-1-运算符"><a href="#3-1-运算符" class="headerlink" title="3.1 运算符"></a>3.1 运算符</h2><p>​	我们先来理清&#x3D;&#x3D;表达式&#x3D;&#x3D;和&#x3D;&#x3D;运算符&#x3D;&#x3D;的关系。</p>
+<p>​	表达式是由一个或多个操作数通过运算符按照一定的规则组合成的。而运算符——即具有运算功能的符号。根据使用运算符的对象个数，将运算符分为&#x3D;&#x3D;单目运算符&#x3D;&#x3D;、&#x3D;&#x3D;双目运算符&#x3D;&#x3D;和&#x3D;&#x3D;三目运算符&#x3D;&#x3D;。</p>
+<h3 id="3-1-1-单目运算符"><a href="#3-1-1-单目运算符" class="headerlink" title="3.1.1 单目运算符"></a>3.1.1 单目运算符</h3><p>​	所谓单目运算符，即只对一个对象进行操作，作用通常是修改变量本身的状态或检查某种状态。我们所用到的单目运算符汇总如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">名称</th>
+<th align="center">示例</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>+</code></td>
+<td align="center">正号运算</td>
+<td align="center"><code>+a</code></td>
+<td align="center">返回 <code>a</code> 本身（几乎没意义）</td>
+</tr>
+<tr>
+<td align="center"><code>-</code></td>
+<td align="center">负号运算</td>
+<td align="center"><code>-a</code></td>
+<td align="center"><code>a</code> 的相反数</td>
+</tr>
+<tr>
+<td align="center"><code>++</code></td>
+<td align="center">前&#x2F;后自增</td>
+<td align="center"><code>++a</code>, <code>a++</code></td>
+<td align="center"><code>a = a + 1</code></td>
+</tr>
+<tr>
+<td align="center"><code>--</code></td>
+<td align="center">前&#x2F;后自减</td>
+<td align="center"><code>--a</code>, <code>a--</code></td>
+<td align="center"><code>a = a - 1</code></td>
+</tr>
+<tr>
+<td align="center"><code>!</code></td>
+<td align="center">逻辑非</td>
+<td align="center"><code>!a</code></td>
+<td align="center">如果 <code>a</code> 为真返回假，反之亦然</td>
+</tr>
+<tr>
+<td align="center"><code>~</code></td>
+<td align="center">按位取反</td>
+<td align="center"><code>~a</code></td>
+<td align="center">二进制位取反</td>
+</tr>
+<tr>
+<td align="center"><code>*</code></td>
+<td align="center">解引用</td>
+<td align="center"><code>*ptr</code></td>
+<td align="center">获取指针 <code>ptr</code> 指向的值</td>
+</tr>
+<tr>
+<td align="center"><code>&amp;</code></td>
+<td align="center">取地址</td>
+<td align="center"><code>&amp;a</code></td>
+<td align="center">获取变量 <code>a</code> 的内存地址</td>
+</tr>
+<tr>
+<td align="center"><code>sizeof</code></td>
+<td align="center">类型大小</td>
+<td align="center"><code>sizeof(a)</code></td>
+<td align="center">获取 <code>a</code> 所占字节数</td>
+</tr>
+<tr>
+<td align="center"><code>typeid</code></td>
+<td align="center">类型信息</td>
+<td align="center"><code>typeid(a)</code></td>
+<td align="center">返回类型信息（运行时类型识别）</td>
+</tr>
+<tr>
+<td align="center"><code>new</code></td>
+<td align="center">动态分配</td>
+<td align="center"><code>new int</code></td>
+<td align="center">分配动态内存</td>
+</tr>
+<tr>
+<td align="center"><code>delete</code></td>
+<td align="center">释放内存</td>
+<td align="center"><code>delete p</code></td>
+<td align="center">释放动态分配的内存</td>
+</tr>
+<tr>
+<td align="center"><code>throw</code></td>
+<td align="center">抛出异常</td>
+<td align="center"><code>throw 1</code></td>
+<td align="center">抛出异常</td>
+</tr>
+<tr>
+<td align="center"><code>co_await</code></td>
+<td align="center">协程等待</td>
+<td align="center"><code>co_await f()</code></td>
+<td align="center">C++20 协程语法</td>
+</tr>
+</tbody></table>
+<p><strong>*注意！：<em><strong>自增加&#x2F;减少存在</strong>前置</em>*和</strong>后置**两种形式，其中前置形式，返回值是自身修改后的值，再参与其他运算；后置形式，先参加其他运算后在进行自身<code>+1</code>。</p>
+<p>**<code>sizeof</code>**运算符的使用：功能是返回指定数据类型或者表达式值的数据类型在内存中占用的字节数。</p>
+<ul>
+<li><code>sizeof(char)</code>和<code>sizeof(bool)</code>占1个字节</li>
+<li><code>sizeof(short)</code>占2个字节</li>
+<li><code>sizeof(int)</code>和<code>sizeof(float)</code>占4个字节</li>
+<li><code>sizeof(double)</code>占8个字节</li>
+</ul>
+<p><em><strong><code>sizeof</code>无法对<code>void</code>类型使用！</strong></em></p>
+<h3 id="3-1-2-双目运算符"><a href="#3-1-2-双目运算符" class="headerlink" title="3.1.2 双目运算符"></a>3.1.2 双目运算符</h3><p>​	双目运算符同理，需要两个操作数<code>a</code>和<code>b</code>才能运行，是最常用的一类运算符。双目运算符可细分为**&#x3D;&#x3D;算术运算符&#x3D;&#x3D;<strong>、&#x3D;&#x3D;<strong>关系运算符</strong>&#x3D;&#x3D;、</strong>&#x3D;&#x3D;逻辑运算符&#x3D;&#x3D;**、&#x3D;&#x3D;<strong>赋值与位运算符</strong>&#x3D;&#x3D;四种。</p>
+<h4 id="3-1-2-1-算术运算符"><a href="#3-1-2-1-算术运算符" class="headerlink" title="3.1.2.1 算术运算符"></a>3.1.2.1 算术运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">示例</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>+</code></td>
+<td align="center"><code>a + b</code></td>
+<td align="center">加法</td>
+</tr>
+<tr>
+<td align="center"><code>-</code></td>
+<td align="center"><code>a - b</code></td>
+<td align="center">减法</td>
+</tr>
+<tr>
+<td align="center"><code>*</code></td>
+<td align="center"><code>a * b</code></td>
+<td align="center">乘法</td>
+</tr>
+<tr>
+<td align="center"><code>/</code></td>
+<td align="center"><code>a / b</code></td>
+<td align="center">除法</td>
+</tr>
+<tr>
+<td align="center"><code>%</code></td>
+<td align="center"><code>a % b</code></td>
+<td align="center">取余（整数）</td>
+</tr>
+</tbody></table>
+<p><em><strong>注意！：</strong></em> 取余运算又称为<strong>模运算</strong>，机制是取整运算。</p>
+<h4 id="3-1-2-2-关系运算符"><a href="#3-1-2-2-关系运算符" class="headerlink" title="3.1.2.2 关系运算符"></a>3.1.2.2 关系运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">示例</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>==</code></td>
+<td align="center"><code>a == b</code></td>
+<td align="center">是否相等</td>
+</tr>
+<tr>
+<td align="center"><code>!=</code></td>
+<td align="center"><code>a != b</code></td>
+<td align="center">是否不等</td>
+</tr>
+<tr>
+<td align="center"><code>&gt;</code></td>
+<td align="center"><code>a &gt; b</code></td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;</code></td>
+<td align="center"><code>a &lt; b</code></td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center"><code>&gt;=</code></td>
+<td align="center"><code>a &gt;= b</code></td>
+<td align="center">大于等于</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;=</code></td>
+<td align="center"><code>a &lt;= b</code></td>
+<td align="center">小于等于</td>
+</tr>
+</tbody></table>
+<p><em><strong>&#x3D;&#x3D;注意！&#x3D;&#x3D;：</strong></em></p>
+<ul>
+<li><p><em><strong>请不要混淆<code>=</code>和<code>==</code>的概念！<code>=</code>代表赋值，<code>==</code>代表恒等！一个变量和一个常量判断是否相等时，可以写成<code>1==a</code>。</strong></em></p>
+</li>
+<li><p><em><strong>请不要串接使用关系运算符！例如数学中的连续小于<code>a&lt;b&lt;c</code>，但是在C++语法中<code>a&lt;b&lt;c</code>是错误的！C++的语法中正确表达应该为<code>a&lt;b &amp;&amp; a&lt;c</code>!</strong></em></p>
+</li>
+</ul>
+<h4 id="3-1-2-3-逻辑运算符"><a href="#3-1-2-3-逻辑运算符" class="headerlink" title="3.1.2.3 逻辑运算符"></a>3.1.2.3 逻辑运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">示例</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&amp;&amp;</code></td>
+<td align="center"><code>a &amp;&amp; b</code></td>
+<td align="center">与（AND）</td>
+</tr>
+<tr>
+<td align="center">&#96;</td>
+<td align="center"></td>
+<td align="center">&#96;</td>
+</tr>
+</tbody></table>
+<h4 id="3-1-2-4-赋值与位运算符"><a href="#3-1-2-4-赋值与位运算符" class="headerlink" title="3.1.2.4 赋值与位运算符"></a>3.1.2.4 赋值与位运算符</h4><table>
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">含义</th>
+<th align="center">等价于表达式</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>=</code></td>
+<td align="center">赋值</td>
+<td align="center"><code>a=b</code></td>
+<td align="center"><code>a = b</code></td>
+</tr>
+<tr>
+<td align="center"><code>+=</code></td>
+<td align="center">加后赋值</td>
+<td align="center"><code>a = a + b</code></td>
+<td align="center"><code>a += b</code></td>
+</tr>
+<tr>
+<td align="center"><code>-=</code></td>
+<td align="center">减后赋值</td>
+<td align="center"><code>a = a - b</code></td>
+<td align="center"><code>a -= b</code></td>
+</tr>
+<tr>
+<td align="center"><code>*=</code></td>
+<td align="center">乘后赋值</td>
+<td align="center"><code>a = a * b</code></td>
+<td align="center"><code>a *= b</code></td>
+</tr>
+<tr>
+<td align="center"><code>/=</code></td>
+<td align="center">除后赋值</td>
+<td align="center"><code>a = a / b</code></td>
+<td align="center"><code>a /= b</code></td>
+</tr>
+<tr>
+<td align="center"><code>%=</code></td>
+<td align="center">取余后赋值</td>
+<td align="center"><code>a = a % b</code></td>
+<td align="center"><code>a %= b</code></td>
+</tr>
+<tr>
+<td align="center"><code>&lt;&lt;=</code></td>
+<td align="center">左移后赋值</td>
+<td align="center"><code>a = a &lt;&lt; b</code></td>
+<td align="center"><code>a &lt;&lt;= 1</code></td>
+</tr>
+<tr>
+<td align="center"><code>&gt;&gt;=</code></td>
+<td align="center">右移后赋值</td>
+<td align="center"><code>a = a &gt;&gt; b</code></td>
+<td align="center"><code>a &gt;&gt;= 2</code></td>
+</tr>
+<tr>
+<td align="center"><code>&amp;=</code></td>
+<td align="center">按位与后赋值</td>
+<td align="center"><code>a = a &amp; b</code></td>
+<td align="center"><code>a &amp;= b</code></td>
+</tr>
+<tr>
+<td align="center">&#96;</td>
+<td align="center">&#x3D;&#96;</td>
+<td align="center">按位或后赋值</td>
+<td align="center">&#96;a&#x3D;a</td>
+</tr>
+<tr>
+<td align="center"><code>^=</code></td>
+<td align="center">按位异或后赋值</td>
+<td align="center"><code>a = a ^ b</code></td>
+<td align="center"><code>a ^= b</code></td>
+</tr>
+</tbody></table>
+<p>​	<em><strong>位运算符的使用：</strong></em></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">  <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">1100</span></span><br><span class="line">&amp; <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">1000</span></span><br><span class="line">---------------------- <span class="comment">//十进制的12和8，进行与（AND）运算</span></span><br><span class="line">  <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">1000</span>  <span class="comment">//运算结果是8</span></span><br><span class="line">      </span><br><span class="line">  <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0100</span></span><br><span class="line">| <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">1000</span></span><br><span class="line">---------------------- <span class="comment">//十进制的4和8，进行或（OR）运算</span></span><br><span class="line">  <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">1100</span>  <span class="comment">//运算结果是12</span></span><br><span class="line">      </span><br><span class="line">  <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">1111</span></span><br><span class="line">^ <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">0110</span></span><br><span class="line">---------------------- <span class="comment">//十进制的31和22进行位异或运算</span></span><br><span class="line">  <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">1001</span>  <span class="comment">//运算结果是9</span></span><br><span class="line"> </span><br><span class="line">~ <span class="number">1010</span> <span class="number">0011</span> <span class="number">1001</span> <span class="number">1011</span> <span class="comment">//十进制的41883进行取反运算</span></span><br><span class="line">----------------------</span><br><span class="line">  <span class="number">0101</span> <span class="number">1100</span> <span class="number">0110</span> <span class="number">0100</span> <span class="comment">//运算结果是2365</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-1-3-三目运算符"><a href="#3-1-3-三目运算符" class="headerlink" title="3.1.3 三目运算符"></a>3.1.3 三目运算符</h3><p>​	在C++中，<strong>有且只有一种三目运算符——<code>?:</code></strong>，一般用于条件判断表达式之中。如下示例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">条件 ? 表达式<span class="number">1</span> : 表达式<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a = <span class="number">5</span>, b = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> max = (a &gt; b) ? a : b; <span class="comment">// 如果 a &gt; b 成立，max = a；否则 max = b</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="3-2-类型转换"><a href="#3-2-类型转换" class="headerlink" title="3.2 类型转换"></a>3.2 类型转换</h2><h3 id="3-2-1-隐式类型转换"><a href="#3-2-1-隐式类型转换" class="headerlink" title="3.2.1 隐式类型转换"></a>3.2.1 隐式类型转换</h3><p>​	所谓的隐式转换，是指<strong>编译器</strong>在你没有明确要求的情况下，<strong>自动</strong>把一种类型的数据<strong>转换成另一种类型</strong>，以完成某些操作。例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">5</span>;</span><br><span class="line"><span class="type">double</span> b=<span class="number">2.5</span>;</span><br><span class="line"><span class="type">double</span> result=a+b;</span><br></pre></td></tr></table></figure>
+
+<p>​	一个很直观的例子，在这简单的几行代码中发生了什么？我们可以看到<code>a</code>和<code>b</code>两者是不同的数据类型，<code>int</code>是<strong>4字节</strong>的数据，而<code>double</code>是<strong>8字节</strong>的数据。因此，虽然没有明确的指令，但是编译器自动将<code>a</code>转换成<code>5.0</code>再和<code>b</code>进行加法运算。	</p>
+<p>​	常见的隐式转换如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">转换场景</th>
+<th align="center">示例</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">基本类型自动提升</td>
+<td align="center"><code>int -&gt; double</code>, <code>char -&gt; int</code></td>
+<td align="center">小范围类型自动提升为大范围类型</td>
+</tr>
+<tr>
+<td align="center">条件判断</td>
+<td align="center"><code>if (x)</code> 把 <code>int</code> 当成 <code>bool</code></td>
+<td align="center"><code>0</code> 被当作 <code>false</code>，非零为 <code>true</code></td>
+</tr>
+<tr>
+<td align="center">函数参数匹配</td>
+<td align="center"><code>void func(double x);</code> 传 <code>int</code></td>
+<td align="center"><code>int</code> 自动转换为 <code>double</code></td>
+</tr>
+<tr>
+<td align="center">赋值操作</td>
+<td align="center"><code>double x = 3;</code></td>
+<td align="center"><code>int</code> 3 自动转换为 <code>double</code> 3.0</td>
+</tr>
+</tbody></table>
+<p>​	<em><strong>注意！：隐式转换也会存在一定的风险！可能存在&#x3D;&#x3D;精度丢失&#x3D;&#x3D;或者&#x3D;&#x3D;逻辑错误&#x3D;&#x3D;的风险！</strong></em></p>
+<p>​	为了避免不必要的风险，在隐式转换中，我们要遵循算术类型转换的规则。<em><strong>核心内容是确保转换兼容，将精度损失降到最小</strong></em>。</p>
+<p>​	C++ 遇到两个不同类型的算术值进行运算，会把“较低等级的类型”转换为“更高等级的类型”。转换顺序如下（从低到高）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">转换等级</th>
+<th align="center">类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center"><code>bool</code> → 转成 <code>int</code></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">整型提升（<code>char</code>, <code>short </code>→ <code>int</code>）</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"><code>int</code>, <code>unsigned int</code></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"><code>long</code>, <code>unsigned long</code></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"><code>long long</code>, <code>unsigned long long</code></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"><code>float</code></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center"><code>double</code></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center"><code>long double</code></td>
+</tr>
+</tbody></table>
+<h3 id="3-2-1-强制类型转换"><a href="#3-2-1-强制类型转换" class="headerlink" title="3.2.1 强制类型转换"></a>3.2.1 强制类型转换</h3><p>​	所谓强制类型转换，就是<strong>程序员显式地告诉编译器</strong>，把一个类型的数据转换成另一个类型。</p>
+<p>​	C++提供了四种类型转换运算符：</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型转换符</th>
+<th align="center">用途</th>
+<th align="center">是否安全</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>static_cast</code></td>
+<td align="center">普通类型转换，如 int→double、指针类型之间的基本转换</td>
+<td align="center">✅</td>
+<td align="left"><code>double b = static_cast&lt;double&gt;(a);</code></td>
+</tr>
+<tr>
+<td align="center"><code>const_cast</code></td>
+<td align="center">去掉变量的 <code>const</code> &#x2F; <code>volatile</code> 修饰</td>
+<td align="center">⚠️ 危险</td>
+<td align="left"><code>char* p = const_cast&lt;char*&gt;(str);</code></td>
+</tr>
+<tr>
+<td align="center"><code>dynamic_cast</code></td>
+<td align="center">用于类层次间的安全向下转型，<strong>必须有虚函数</strong></td>
+<td align="center">✅</td>
+<td align="left"><code>Derived* d = dynamic_cast&lt;Derived*&gt;(base);</code></td>
+</tr>
+<tr>
+<td align="center"><code>reinterpret_cast</code></td>
+<td align="center">强行转换指针类型或底层二进制表示</td>
+<td align="center">❗ 非常危险</td>
+<td align="left"><code>int* p = reinterpret_cast&lt;int*&gt;(0x12345678);</code></td>
+</tr>
+</tbody></table>
+<p>​	虽然C++支持强制类型转换，但是我们要清楚的认识到**强制类型转换有时是危险的！**应该仔细考虑，如果可以使用其他方法可以达到目的，建议避免使用强制类型转换，不依赖强制类型转换也可以设计出好的程序。</p>
+<hr>
+<h2 id="3-3-语句"><a href="#3-3-语句" class="headerlink" title="3.3 语句"></a>3.3 语句</h2><h3 id="3-3-1-条件判断句"><a href="#3-3-1-条件判断句" class="headerlink" title="3.3.1 条件判断句"></a>3.3.1 条件判断句</h3><p>​	我们第一个要学的语句就是条件判断据，我们数学都学过决策，所谓决策，<strong>就是人们为某件事情拿主意，下决心做出合理选择的过程</strong>。什么叫合理选择呢？就是因地制宜的意思，我们人为的给出做出某决策的条件，让机器来进行判断，面对不同的实际情况，做出不同的选择。这就是我们要学的<code>if</code>语句。</p>
+<p>​	<code>if</code>语句的用法很简单，例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(表达式)</span><br><span class="line">语句<span class="number">1</span>；</span><br><span class="line">语句<span class="number">2</span>；</span><br></pre></td></tr></table></figure>
+
+<p>​	意味着如果满足某表达式，则进行到语句1的决策之中，若不满足，则跳过语句1的决策，进入到语句2的决策之中。</p>
+<p>​	但是通常我们并不会单独使用<code>if</code>语句，而是会搭配上<code>else</code>一起使用。例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(表达式)</span><br><span class="line">语句<span class="number">1</span>；</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">语句<span class="number">2</span>；</span><br></pre></td></tr></table></figure>
+
+<p>​	这意味着如果我们的输入进入到<code>if</code>语句之中，若满足表达式条件，则进入语句1之中再输出；若不满足条件，则进入到语句2之中再输出。我们要注意的是，<em><strong><code>else</code>不能够单独使用！必须和关键词<code>if</code>一起出现。</strong></em></p>
+<p>​	学会了<code>if else</code>的用法之后，我们来讲第三种形式的判断语句——即<code>else if</code>判断语句。所谓的<code>else if</code>判断语句，***实际上就是多个<code>if else</code>的嵌套用法。***例如：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(表达式<span class="number">1</span>)</span><br><span class="line">	语句<span class="number">1</span>；</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(表达式<span class="number">2</span>)</span><br><span class="line">	语句<span class="number">2</span>；</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(表达式<span class="number">3</span>)</span><br><span class="line">	语句<span class="number">3</span>；</span><br><span class="line">	....</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(表达式M)</span><br><span class="line">	语句M；</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">	语句N；</span><br></pre></td></tr></table></figure>
+
+<p>​	与前两者同理，输入的数据不断地进入表达式的决策之中，若不满足则会一直持续到下一个表达式，直到满足某个表达式的决策之后，进入到对应的语句之中，然后输出结果。</p>
+<p>​	第四种条件判断语句的用法则是使用我们前文所提到的条件判断符来进行，即<code>( )?( ):( )</code>的形式。这里就不多赘述了。</p>
+<p>​	第五种则是<code>switch-case</code>的用法,它是一种 <strong>多分支选择结构</strong>，用于根据某个“整数表达式”的值，执行不同的代码块。它的用法如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (表达式) &#123;</span><br><span class="line">    <span class="keyword">case</span> 常量值<span class="number">1</span>:</span><br><span class="line">        <span class="comment">// 执行语句1</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> 常量值<span class="number">2</span>:</span><br><span class="line">        <span class="comment">// 执行语句2</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// 所有 case 都不匹配时执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	与<code>if else</code>语句所不相同的是，**&#96;&#96;switch-case<code>更适合值相等的时候使用，不适合范围的判断（例如 </code>x&gt;5<code>的时候），**并且表达式的内容只能是整形（如 </code>int<code>、</code>char<code>、</code>enum<code>）。当然，不能忘记写</code>break&#96;,用于防止穿透！</p>
+<p>​	</p>
+<h4 id="3-3-1-1-简单实例1"><a href="#3-3-1-1-简单实例1" class="headerlink" title="3.3.1.1 简单实例1"></a>3.3.1.1 简单实例1</h4><p>​	通过学习以上几种运算符以及条件判断句的使用方法，我们或许可以进行一定程度的编程练习。</p>
+<ul>
+<li>实例一：请编写一个程序，要求用户输入一个学生的三门课程成绩（语文、数学、英语），然后完成以下功能：<ul>
+<li>计算该学生的总分和平均分</li>
+<li>判断该学生是否及格（每门课都 ≥ 60）</li>
+<li>判断是否优秀（平均分 ≥ 85 或总分 ≥ 270）</li>
+<li>奖励机制：如果学生优秀，每门成绩加 5 分，但最高不超过 100 分</li>
+<li>输出分析结果，包括：<ul>
+<li>原始成绩、总分、平均分</li>
+<li>是否及格</li>
+<li>是否优秀</li>
+<li>奖励后的新成绩（如果有奖励）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">示例输入：</span><br><span class="line">请输入语文成绩：<span class="number">85</span></span><br><span class="line">请输入数学成绩：<span class="number">90</span></span><br><span class="line">请输入英语成绩：<span class="number">92</span></span><br><span class="line"></span><br><span class="line">示例输出：</span><br><span class="line">原始成绩：语文=<span class="number">85</span>，数学=<span class="number">90</span>，英语=<span class="number">92</span></span><br><span class="line">总分：<span class="number">267</span>，平均分：<span class="number">89.00</span></span><br><span class="line">是否及格：是</span><br><span class="line">是否优秀：是</span><br><span class="line">奖励后成绩：语文=<span class="number">90</span>，数学=<span class="number">95</span>，英语=<span class="number">97</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-2-循环语句"><a href="#3-3-2-循环语句" class="headerlink" title="3.3.2  循环语句"></a>3.3.2  循环语句</h3><p>​	学习完条件判断语句之后，我们将要重点学习<strong>循环语句</strong>，所谓循环语句，就是是让程序<strong>重复执行某段代码</strong>的语句，直到满足某个退出条件为止。循环语句的构成一般由四个部分构成，即***&#x3D;&#x3D;初始体&#x3D;&#x3D;<em><strong>、&#x3D;&#x3D;<em><strong>判断条件</strong></em>&#x3D;&#x3D;、</strong></em>&#x3D;&#x3D;更新部分&#x3D;&#x3D;***、&#x3D;&#x3D;<em><strong>循环体</strong></em>&#x3D;&#x3D;。</p>
+<table>
+<thead>
+<tr>
+<th align="center">部分</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>初始化</strong></td>
+<td align="center">设置循环开始前的状态</td>
+</tr>
+<tr>
+<td align="center"><strong>判断条件</strong></td>
+<td align="center">控制是否继续执行</td>
+</tr>
+<tr>
+<td align="center"><strong>更新部分</strong></td>
+<td align="center">每次循环后的变量更新</td>
+</tr>
+<tr>
+<td align="center"><strong>循环体</strong></td>
+<td align="center">每次执行的操作（代码块）</td>
+</tr>
+</tbody></table>
+<p>​	我们将从最常见的<code>while</code>循环开始学习。</p>
+<p>​	所谓<code>while</code>，中文意思即<em><strong>当…..的时候</strong></em>，因此它的用法也正如它的中文意思一致：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a ;</span><br><span class="line"><span class="keyword">while</span> (a&lt;=<span class="number">5</span>) &#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    a++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	我们可以很轻易的发现<code>while</code>的流程即是***&#x3D;&#x3D;先判断，再执行&#x3D;&#x3D;<em><strong>。因为我们已知的是</strong>循环的规则</em><em>，但是</em><strong>&#x3D;&#x3D;不知道进入循环前的输入是否符合条件&#x3D;&#x3D;</strong><em>，所以<code>while</code>适用于</em>**&#x3D;&#x3D;条件不确定&#x3D;&#x3D;***的循环。</p>
+<p>​	第二种则是<code>for</code>循环，它的用法如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (初始化语句; 条件表达式; 更新语句) &#123;</span><br><span class="line">    循环体语句;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​	它的执行顺序是：</p>
+<ul>
+<li><em><strong>先执行一次初始化语句</strong></em></li>
+<li><em><strong>执行一次条件表达式</strong></em>，<em><strong>若为假，则退出循环</strong></em>；<em><strong>若为真，则执行循环体语句一次</strong></em>，</li>
+<li><em><strong>执行一次更新语句并且回到执行条件表达式</strong></em>，<em><strong>直到满足&#x3D;&#x3D;条件表达式为假&#x3D;&#x3D;</strong></em>。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">IBUKI</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/07/31/3.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/">http://example.com/2025/07/31/3.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">ShiinoHiyori's Website</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/ShiinoHiyori-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width no-desc" href="/2025/07/17/2025-07-1-Blog_template/" title="Blog template"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Blog template</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/ShiinoHiyori-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">IBUKI</div><div class="author-info-description">记录生活片段</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/ShiinoHiyori" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:2456544709lxy@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">3.表达式和语句</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.</span> <span class="toc-text">3.1 运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E5%8D%95%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">3.1.1 单目运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E5%8F%8C%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.2.</span> <span class="toc-text">3.1.2 双目运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">3.1.2.1 算术运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-2-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">3.1.2.2 关系运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">3.1.2.3 逻辑运算符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-4-%E8%B5%8B%E5%80%BC%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">3.1.2.4 赋值与位运算符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.1.3 三目运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.2.1.</span> <span class="toc-text">3.2.1 隐式类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.2.2.</span> <span class="toc-text">3.2.1 强制类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%8F%A5"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.3.1 条件判断句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-1-%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B1"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">3.3.1.1 简单实例1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.3.2  循环语句</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/31/3.%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/" title="表达式和语句">表达式和语句</a><time datetime="2025-07-31T09:07:43.000Z" title="发表于 2025-07-31 17:07:43">2025-07-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/17/2025-07-1-Blog_template/" title="Blog template">Blog template</a><time datetime="2025-07-17T02:12:03.000Z" title="发表于 2025-07-17 10:12:03">2025-07-17</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;2025 By IBUKI</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
